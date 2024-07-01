@@ -1,21 +1,54 @@
-import {TextInput, View, StyleSheet} from 'react-native'
+import {TextInput, View, StyleSheet, Alert} from 'react-native'
 import PrimaryButton from '../components/PrimaryButton'
+import { useState } from 'react'
+import Colors from '../variables/color'
 
+const StartGameScreen = ({onPick}) => {
 
-const StartGameScreen = () => {
+  const [enteredNumber, setEnteredNumber] = useState('')
+
+  const handleInput = (enteredText) => {
+    setEnteredNumber(enteredText)
+  }
+
+  const handleReset = () => {
+    setEnteredNumber('')
+  }
+
+  const handleConfirm = () => {
+    const chosenNumber = parseInt(enteredNumber)
+
+    if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
+      Alert.alert('Invalid Number',
+      'Number has to be a number between 1 and 99.',
+      [{text: "Okey", style: 'destructive', onPress: handleReset}]
+       )
+      return
+    }
+    onPick(chosenNumber)
+  }
+
   return (
     <View style={styles.inputContainer}>
-      <TextInput style={styles.numberInput} maxLength={2} keyboardType='number-pad'/>
+      <TextInput
+      style={styles.numberInput}
+      maxLength={2}
+      keyboardType='number-pad'
+      autoCapitalize='none'
+      autoCorrect={false}
+      value={enteredNumber}
+      onChangeText={handleInput}
+      />
 
 
       <View style={styles.buttonsContainer}>
 
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onPress={handleReset}>Reset</PrimaryButton>
         </View>
 
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onPress={handleConfirm}>Confirm</PrimaryButton>
         </View>
       </View>
 
@@ -32,7 +65,7 @@ const styles= StyleSheet.create({
     alignItems:'center',
     padding:16,
     marginTop:100,
-    backgroundColor:'#4e0329',
+    backgroundColor:Colors.primaryDark,
     borderRadius:8,
     marginHorizontal:24,
     elevation:8, //This adds a shadow on android devices and only andrioid
@@ -47,9 +80,9 @@ const styles= StyleSheet.create({
     height:50,
     width:50,
     fontSize:32,
-    borderBottomColor:'#ddb52f',
+    borderBottomColor:Colors.secondaryLight,
     borderBottomWidth:2,
-    color:'#ddb52f',
+    color:Colors.secondaryLight,
     marginVertical:8,
     fontWeight: 'bold',
     textAlign:'center'
