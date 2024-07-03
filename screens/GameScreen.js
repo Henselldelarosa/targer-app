@@ -23,6 +23,7 @@ const GameScreen = ({userNumber}) => {
 
   const initialGuess = generateRandomBetween(minBoundary, maxBoundary, userNumber)
   const [currentGuess, setCurrentGuess] = useState(initialGuess)
+ 
 
   const handleNextGuess = (direction) => {
     if(
@@ -30,7 +31,7 @@ const GameScreen = ({userNumber}) => {
       ||
     (direction === 'greater' && currentGuess > userNumber))
     {
-      Alert.alert("You lie", [{text: 'Sorry', style: 'cancel'},
+      Alert.alert("You lie", 'You know that is wrong...', [{text: 'Sorry', style: 'cancel'},
 
       ])
       return;
@@ -42,7 +43,6 @@ const GameScreen = ({userNumber}) => {
       minBoundary = currentGuess + 1
     }
 
-    console.log(minBoundary,maxBoundary)
     const newNum = generateRandomBetween(minBoundary, maxBoundary, currentGuess)
     setCurrentGuess(newNum)
   }
