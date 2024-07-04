@@ -2,6 +2,9 @@ import {TextInput, View, StyleSheet, Alert} from 'react-native'
 import PrimaryButton from '../components/ui/PrimaryButton'
 import { useState } from 'react'
 import Colors from '../variables/color'
+import Title from '../components/ui/Title'
+import Card from '../components/ui/Card'
+import InstructionText from '../components/ui/InstructionText'
 
 const StartGameScreen = ({onPick}) => {
 
@@ -29,7 +32,13 @@ const StartGameScreen = ({onPick}) => {
   }
 
   return (
-    <View style={styles.inputContainer}>
+  <View style={styles.rootContainer}>
+    <Title>Guess My Number</Title>
+
+    <Card>
+
+      <InstructionText>Enter A Number</InstructionText>
+
       <TextInput
       style={styles.numberInput}
       maxLength={2}
@@ -52,30 +61,26 @@ const StartGameScreen = ({onPick}) => {
         </View>
       </View>
 
-    </View>
+    </Card>
+</View>
   )
 }
 
 export default StartGameScreen
 
 const styles= StyleSheet.create({
-  inputContainer: {
-    // flex: 1,
-    justifyContent:'center',
-    alignItems:'center',
-    padding:16,
+  rootContainer: {
+    flex:1,
     marginTop:100,
-    backgroundColor:Colors.primaryDark,
-    borderRadius:8,
-    marginHorizontal:24,
-    elevation:8, //This adds a shadow on android devices and only andrioid
-
-    //This how you add shadown on IOS
-    shadowColor: 'black',
-    shadowOffset:{width:0, height:2},
-    shadowRadius:6,
-    shadowOpacity:0.25
+    alignItems:'center'
   },
+  inputText:{
+    color:Colors.secondaryLight,
+    fontWeight:'bold',
+    fontSize:24
+  },
+
+
   numberInput: {
     height:50,
     width:50,
