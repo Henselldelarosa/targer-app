@@ -30,8 +30,9 @@ export default function App() {
   }
 
 
-  const handleGameOver =() => {
+  const handleGameOver =(numberOfRounds) => {
     setGameOver(true)
+    setGuessRound(numberOfRounds)
   }
 
   let screen = <StartGameScreen onPick={handleNumberPick} />;
@@ -43,7 +44,6 @@ export default function App() {
   }
 
     const handleResetGame = () => {
-      // setGameOver(false)
       setUserNumber(null)
       setGuessRound(0)
     }
