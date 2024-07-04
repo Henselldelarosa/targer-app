@@ -13,6 +13,7 @@ export default function App() {
 
   const [userNumber, setUserNumber] = useState(null)
   const [gameOver, setGameOver] = useState(false)
+  const [guessRound, setGuessRound] = useState(0)
 
   const [fontsLoaded] = useFonts({
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
@@ -37,17 +38,22 @@ export default function App() {
 
   if (userNumber) {
     screen = (
-      <GameScreen userNumber={userNumber} onGameOver = {handleGameOver}/>
+      <GameScreen userNumber={userNumber} onGameOver = {handleGameOver} guessRounds={guessRound}/>
     );
   }
 
     const handleResetGame = () => {
-      setGameOver(false)
+      // setGameOver(false)
       setUserNumber(null)
+      setGuessRound(0)
     }
 
-  if(gameOver){
-    screen = <GameOverScreen setGame={handleResetGame}/>
+  if(gameOver && userNumber){
+    screen = <GameOverScreen
+              userNumber={userNumber}
+              roundsNumber={guessRound}
+              resetGame={handleResetGame}
+              />
   }
 
 
@@ -82,5 +88,3 @@ const styles = StyleSheet.create({
     opacity:.15
   }
 });
-
-///Users/henselldelarosa/Programming/udemy/react-native/target-app/assets/images/dices.avif
