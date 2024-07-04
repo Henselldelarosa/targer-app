@@ -41,10 +41,14 @@ export default function App() {
     );
   }
 
-  if(gameOver){
-    screen = <GameOverScreen/>
-  }
+    const handleResetGame = () => {
+      setGameOver(false)
+      setUserNumber(null)
+    }
 
+  if(gameOver){
+    screen = <GameOverScreen setGame={handleResetGame}/>
+  }
 
 
   return (
