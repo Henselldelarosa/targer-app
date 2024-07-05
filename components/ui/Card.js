@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, StyleSheet} from 'react-native'
+import {View, StyleSheet, Dimensions} from 'react-native'
 import Colors from '../../variables/color'
 
 const Card = ({children}) => {
@@ -12,12 +12,14 @@ const Card = ({children}) => {
 
 export default Card
 
+const deviceWidth = Dimensions.get('window').width
+
 const styles= StyleSheet.create({
   card: {
     justifyContent:'center',
     alignItems:'center',
     padding:16,
-    marginTop:36,
+    marginTop: deviceWidth < 380 ? 18 : 36,
     backgroundColor:Colors.primaryDark,
     borderRadius:8,
     marginHorizontal:24,

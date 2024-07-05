@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
     borderWidth:2,
     borderColor:'white',
     padding:12,
-    marginTop: Platform.OS === 'android' ? 30 : 0
+    marginTop: Platform.OS === 'android' ? 30 : 0,
+    maxWidth:'80%',
+    minWidth:'80%'
   }
 })
