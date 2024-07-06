@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View, StyleSheet, Platform} from 'react-native'
+import {Text, StyleSheet, Platform} from 'react-native'
 
 
 const Title = ({children}) => {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontSize:24,
     color:'white',
     textAlign: 'center',
-    borderWidth:2,
+    borderWidth:Platform.OS ==='android' ? 2: 0,
     borderColor:'white',
     padding:12,
     // marginTop: Platform.OS === 'android' ? 30 : 10,

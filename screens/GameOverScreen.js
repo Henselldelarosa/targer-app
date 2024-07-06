@@ -1,32 +1,66 @@
 import React from 'react'
-import {Text, View, StyleSheet, Image, Dimensions} from 'react-native'
+import {Text, View, StyleSheet, Image, Dimensions, useWindowDimensions} from 'react-native'
 import Title from '../components/ui/Title'
 import Colors from '../variables/color'
 import PrimaryButton from '../components/ui/PrimaryButton'
 
 const GameOverScreen = ({resetGame, userNumber, roundsNumber}) => {
 
+  const {width, height} = useWindowDimensions()
+
+
+  let content = (
+    <>
+     <Title>Game Over</Title>
+
+      <View style={styles.imageContainer}>
+        <Image style={styles.image} source={require('../assets/images/success.png')}/>
+      </View>
+        <Text style={styles.summaryText}>Your phone needed
+          <Text style={styles.highlight}> {roundsNumber} </Text> rounds to guess the
+          <Text style={styles.highlight}> {userNumber} </Text>.
+      </Text>
+
+      <PrimaryButton onPress={resetGame}>Start New Game</PrimaryButton>
+    </>
+  )
+
+  let imageSize = 300
+
+  if (width < 380) {
+    imageSize = 150
+  }
+
+  if (height < 400) {
+    imageSize = 80
+  }
+
+  const imageStyle = {
+    width : imageSize,
+    height: imageSize,
+    borderRadius: imageSize / 2
+  }
+
 
   return (
    <View style={styles.gameOverScreenContainer}>
-    <Title>Game Over</Title>
+        <Title>Game Over</Title>
 
-    <View style={styles.imageContainer}>
-      <Image style={styles.image} source={require('../assets/images/success.png')}/>
-    </View>
-      <Text style={styles.summaryText}>Your phone needed
-        <Text style={styles.highlight}> {roundsNumber} </Text> rounds to guess the
-        <Text style={styles.highlight}> {userNumber} </Text>.
-    </Text>
+<View style={[styles.imageContainer, imageStyle]}>
+  <Image style={styles.image} source={require('../assets/images/success.png')}/>
+</View>
+  <Text style={styles.summaryText}>Your phone needed
+    <Text style={styles.highlight}> {roundsNumber} </Text> rounds to guess the
+    <Text style={styles.highlight}> {userNumber} </Text>.
+</Text>
 
-    <PrimaryButton onPress={resetGame}>Start New Game</PrimaryButton>
+<PrimaryButton onPress={resetGame}>Start New Game</PrimaryButton>
    </View>
   )
 }
 
 export default GameOverScreen
 
-const deviceWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   gameOverScreenContainer: {
@@ -37,19 +71,19 @@ const styles = StyleSheet.create({
   },
 
   imageContainer:{
-    width: deviceWidth < 380 ? 150 : 300,
-    height: deviceWidth < 380 ? 150 : 300,
-    borderRadius: deviceWidth < 380 ? 75 : 150,
     borderWidth: 3,
     color: Colors.primaryDark,
     overflow: 'hidden',
     margin:36
   },
 
+
   image:{
     width:'100%',
     height:'100%'
   },
+
+
 
   summaryText:{
     fontFamily:'open-sans',
@@ -57,6 +91,8 @@ const styles = StyleSheet.create({
     textAlign:'center',
     marginVertical:24
   },
+
+
   highlight:{
     fontFamily:'open-sans-bold',
     color:Colors.primaryMiddle
